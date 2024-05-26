@@ -1,0 +1,34 @@
+# Save and Writing Files using numpy & Load data from Files using numpy
+
+#1: CSV Fileimport numpy as np
+import numpy as np
+data = np.array([[11, 20, 33], [44, 54, 63]])
+# Save the data to a CSV file
+np.savetxt("data.csv", data, delimiter=",")
+# Load the data from the CSV file
+loaded_data = np.loadtxt("data.csv", delimiter=",")
+print(loaded_data)
+
+#2. NumPy Binary File:
+import numpy as np
+data = np.array([[10, 20, 30], [40, 50, 60]])
+# Save the data to a NumPy binary file
+np.save("data.npy", data)
+# Load the data from the NumPy binary file
+loaded_data = np.load("data.npy")
+print(loaded_data)
+
+#3Custom Format (using numpy.genfromtxt with custom delimiters and data types):
+import numpy as np
+data = np.array([[1.5, 2.3, 4.7], [8.2, 9.1, 10.9]])
+def custom_formatter(row):
+  """Custom function to format data as 'value1,value2,value3' string"""
+  return ",".join([str(x) for x in row])
+# Save the data to a custom text file with specific formatting
+np.savetxt("data_custom.txt", data, fmt=custom_formatter)
+def custom_delimiter(data):
+  """Custom function to split data on comma (,) delimiter"""
+  return data.split(",")
+# Load the data from the custom text file using custom delimiter
+loaded_data = np.genfromtxt("data_custom.txt", delimiter=custom_delimiter, dtype=float)
+print(loaded_data)
